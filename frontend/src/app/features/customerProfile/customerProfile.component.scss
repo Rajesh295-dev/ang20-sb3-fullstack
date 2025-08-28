@@ -1,0 +1,248 @@
+$page-bg: #eef3f7;
+$card-bg: #ffffff;
+$ink: #1f2937;
+$muted: #6b7280;
+$line: #e5e7eb;
+$primary: #2563eb;
+$success: #10b981;
+$pending: #38bdf8;
+
+.page {
+  padding: 1.25rem;
+  background: $page-bg;
+  min-height: 100%;
+}
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $muted;
+  margin-bottom: 1rem;
+
+  a {
+    color: $primary;
+    text-decoration: none;
+  }
+  .current {
+    color: $ink;
+    font-weight: 600;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: $card-bg;
+  border: 1px solid $line;
+  border-radius: 0.5rem;
+  padding: 1rem;
+
+  &.profile-card {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+
+    .avatar img {
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      object-fit: cover;
+    }
+
+    .meta {
+      h3 {
+        margin: 0;
+        color: $ink;
+      }
+      .email {
+        margin: 2px 0 6px;
+        color: $muted;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  &.stat {
+    margin-top: 0.75rem;
+
+    .label {
+      color: $muted;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .stat-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid $line;
+      border-radius: 0.5rem;
+      padding: 0.75rem 0.9rem;
+      background: #f9fafb;
+
+      span {
+        color: $ink;
+      }
+      strong {
+        font-size: 1.1rem;
+      }
+      .money {
+        background: #e8fff3;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.375rem;
+        border: 1px solid #b7f3d4;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.375rem;
+  background: #e5e7eb;
+  &.active {
+    background: #e6fffb;
+    color: #047857;
+    border: 1px solid #99f6e4;
+  }
+}
+
+.right .card-title {
+  margin: 0 0 0.75rem;
+  color: $ink;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    span {
+      color: $muted;
+      font-size: 0.85rem;
+    }
+    input {
+      border: 1px solid $line;
+      border-radius: 0.375rem;
+      padding: 0.55rem 0.65rem;
+      outline: none;
+
+      &:focus {
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      }
+    }
+  }
+
+  .span-2 {
+    grid-column: span 2;
+  }
+
+  .actions {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.25rem;
+
+    button {
+      background: $primary;
+      color: #fff;
+      border: none;
+      border-radius: 0.375rem;
+      padding: 0.55rem 1rem;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.table-card {
+  margin-top: 1rem;
+}
+.sub {
+  color: $muted;
+  margin: 0.25rem 0 1rem;
+}
+
+.table {
+  border: 1px solid $line;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  .thead,
+  .row {
+    display: grid;
+    grid-template-columns: 1.2fr 2.5fr 0.9fr 1fr 0.8fr 0.8fr;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .thead {
+    background: #111827;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+  }
+
+  .row {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid $line;
+    background: #fff;
+
+    .service {
+      color: $ink;
+    }
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.375rem;
+      &.pending {
+        background: rgba($pending, 0.15);
+        color: #0369a1;
+      }
+      &.paid {
+        background: rgba($success, 0.15);
+        color: #047857;
+      }
+    }
+
+    .ghost {
+      background: #e0f2fe;
+      border: 1px solid #93c5fd;
+      padding: 0.35rem 0.6rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.loading {
+  padding: 2rem;
+  text-align: center;
+  color: $muted;
+}

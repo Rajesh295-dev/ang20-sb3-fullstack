@@ -1,0 +1,208 @@
+$page-bg: #eef3f7;
+$card: #ffffff;
+$ink: #111827;
+$muted: #6b7280;
+$line: #e5e7eb;
+$danger: #ef4444;
+$grand-bg: #111827;
+$grand-ink: #ffffff;
+$paid-bg: #e6fffb;
+$paid-ink: #065f46;
+$paid-border: #99f6e4;
+
+.page {
+  background: $page-bg;
+  padding: 1rem;
+  min-height: 100%;
+  color: $ink;
+}
+
+.crumbs {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: $muted;
+  margin-bottom: 1rem;
+  a {
+    color: #2563eb;
+    text-decoration: none;
+  }
+  .current {
+    color: $ink;
+    font-weight: 600;
+  }
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.75rem;
+  .danger {
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    color: $danger;
+    padding: 0.45rem 0.75rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+  }
+}
+
+.inv-header {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1.2fr 1.2fr 0.9fr;
+  background: $card;
+  border: 1px solid $line;
+  border-radius: 0.5rem;
+  padding: 1rem;
+
+  .muted {
+    color: $muted;
+  }
+  .party h3 {
+    margin: 0.2rem 0 0.4rem;
+  }
+  .to .pill {
+    display: inline-block;
+    font-size: 0.75rem;
+    margin-top: 0.35rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 0.375rem;
+    background: #e5e7eb;
+    &.paid {
+      background: $paid-bg;
+      color: $paid-ink;
+      border: 1px solid $paid-border;
+    }
+  }
+
+  .meta {
+    justify-self: end;
+    text-align: right;
+    .inv-id {
+      background: #1f2937;
+      color: #fff;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.25rem;
+      display: inline-block;
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    .meta {
+      justify-self: start;
+      text-align: left;
+    }
+  }
+}
+
+.items {
+  margin-top: 1rem;
+  background: $card;
+  border: 1px solid $line;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  .thead,
+  .row {
+    display: grid;
+    grid-template-columns: 0.5fr 4fr 1fr 1fr;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .thead {
+    background: #f3f4f6;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+  }
+
+  .row {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid $line;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 0;
+    align-items: stretch;
+    border-top: 1px solid $line;
+
+    .left {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1rem;
+      background: #f9fafb;
+      .cell {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .muted {
+        color: $muted;
+        font-size: 0.85rem;
+      }
+    }
+
+    .grand {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 1rem;
+      background: $grand-bg;
+      color: $grand-ink;
+      strong {
+        font-size: 1.3rem;
+      }
+      .muted {
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+      .grand {
+        align-items: center;
+      }
+    }
+  }
+}
+
+.thanks {
+  text-align: center;
+  margin: 1rem 0;
+  color: $muted;
+}
+
+.loading {
+  text-align: center;
+  color: $muted;
+  padding: 2rem;
+}
+
+/* Print styles so the PDF is clean */
+@media print {
+  .no-print,
+  .crumbs {
+    display: none !important;
+  }
+  .page {
+    padding: 0;
+    background: #fff;
+  }
+  .toolbar {
+    display: none;
+  }
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

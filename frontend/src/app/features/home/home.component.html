@@ -1,0 +1,108 @@
+<!-- top metrics -->
+<section class="metrics">
+  <div class="metric">
+    <div class="icon users" aria-hidden="true"></div>
+    <div class="meta">
+      <!-- signals must be invoked -->
+      <div class="kpi">{{ totalCustomers() }}</div>
+      <div class="label">Total Customers</div>
+    </div>
+  </div>
+
+  <div class="metric">
+    <div class="icon doc" aria-hidden="true"></div>
+    <div class="meta">
+      <div class="kpi">{{ totalInvoices() }}</div>
+      <div class="label">Total Invoices</div>
+    </div>
+  </div>
+
+  <div class="metric">
+    <div class="icon money" aria-hidden="true"></div>
+    <div class="meta">
+      <div class="kpi">${{ totalBilled() }}</div>
+      <div class="label">Total Billed</div>
+    </div>
+  </div>
+</section>
+
+<!-- customers table -->
+<section class="panel">
+  <header class="panel__head">
+    <h2>Customers</h2>
+    <div class="panel__actions">
+      <button
+        class="btn btn--sm"
+        (click)="exportCustomersExcel()"
+        aria-label="Export customers to Excel"
+      >
+        ⤓ Excel
+      </button>
+    </div>
+  </header>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Status</th>
+          <th>Type</th>
+          <th class="right">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of rows(); trackBy: trackById">
+          <td>{{ c.id }}</td>
+          <td>
+            <!-- use photoUrl instead of photo -->
+            <img
+              [ngSrc]="c.photoUrl"
+              width="32"
+              height="32"
+              class="avatar"
+              [alt]="c.name"
+            />
+          </td>
+          <td>{{ c.name }}</td>
+          <td class="muted">{{ c.email }}</td>
+          <td class="muted">{{ c.phone }}</td>
+          <td>
+            <span [class]="badgeClass(c.status)">{{ c.status }}</span>
+          </td>
+          <td>{{ c.type }}</td>
+          <td class="right">
+            <a [routerLink]="['/customers', c.id]" class="btn btn--sm">View</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- pagination -->
+  <footer class="pager">
+    <button
+      class="btn btn--sm ghost"
+      (click)="prev()"
+      [disabled]="page() === 1"
+    >
+      Prev
+    </button>
+    <div class="page-indicator">
+      <span class="current">{{ page() }}</span>
+      <span>/</span>
+      <span>{{ pages() }}</span>
+    </div>
+    <button
+      class="btn btn--sm ghost"
+      (click)="next()"
+      [disabled]="page() === pages()"
+    >
+      Next
+    </button>
+  </footer>
+</section>

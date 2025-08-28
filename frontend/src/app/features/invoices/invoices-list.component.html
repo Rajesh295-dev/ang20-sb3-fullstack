@@ -1,0 +1,65 @@
+<div class="page" *ngIf="!loading(); else loadingTpl">
+  <nav class="crumbs">
+    <a routerLink="/">Home</a>
+    <span>/</span>
+    <span class="current">Invoices</span>
+  </nav>
+
+  <h2 class="title">Invoices</h2>
+
+  <div class="table">
+    <div class="thead">
+      <div>Invoice Number</div>
+      <div>Service</div>
+      <div>Status</div>
+      <div>Date</div>
+      <div>Total</div>
+      <div>Action</div>
+    </div>
+
+    <div
+      class="row"
+      *ngFor="let row of invoices()"
+      (click)="openInvoice(row.id)"
+      tabindex="0"
+    >
+      <div class="id">
+        <a
+          (click)="$event.stopPropagation()"
+          [routerLink]="['/invoices', row.id]"
+        >
+          {{ row.id | uppercase }}
+        </a>
+      </div>
+
+      <div class="service">{{ row.service }}</div>
+
+      <div>
+        <span
+          class="tag"
+          [class.paid]="row.status === 'PAID'"
+          [class.pending]="row.status === 'PENDING'"
+          [class.overdue]="row.status === 'OVERDUE'"
+        >
+          {{ row.status }}
+        </span>
+      </div>
+
+      <div>{{ row.date | date: "MMM d, y" }}</div>
+      <div>{{ row.total | currency: "USD" : "symbol" }}</div>
+
+      <div>
+        <button
+          class="print"
+          (click)="$event.stopPropagation(); printInvoice(row.id)"
+        >
+          Print
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading invoices…</div>
+</ng-template>

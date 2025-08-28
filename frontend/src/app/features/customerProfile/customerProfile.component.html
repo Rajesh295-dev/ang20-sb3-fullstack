@@ -1,0 +1,153 @@
+<div class="page" *ngIf="!loading(); else loadingTpl">
+  <nav class="crumbs">
+    <a routerLink="/">Home</a>
+    <span>/</span>
+    <a routerLink="/customers">Customers</a>
+    <span>/</span>
+    <span class="current">{{ fullName() }}</span>
+  </nav>
+
+  <div class="grid">
+    <!-- Left column -->
+    <aside class="left">
+      <div class="card profile-card">
+        <div class="avatar">
+          <img [src]="customer()?.photoUrl" [alt]="fullName()" />
+        </div>
+        <div class="meta">
+          <h3>{{ fullName() }}</h3>
+          <p class="email">{{ customer()?.email }}</p>
+          <span class="pill" [class.active]="customer()?.status === 'ACTIVE'">
+            {{ customer()?.status }}
+          </span>
+        </div>
+      </div>
+
+      <div class="card stat">
+        <p class="label">Customer Total Invoices</p>
+        <div class="stat-body">
+          <span>Total Current Invoices</span>
+          <strong>{{ customer()?.totalInvoices }}</strong>
+        </div>
+      </div>
+
+      <div class="card stat">
+        <p class="label">Customer Total Billed</p>
+        <div class="stat-body">
+          <span>Total Billed</span>
+          <strong class="money">
+            {{ customer()?.totalBilled | currency: "USD" : "symbol" }}
+          </strong>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right column -->
+    <section class="right">
+      <div class="card">
+        <h3 class="card-title">Profile Details</h3>
+
+        <form [formGroup]="form" class="form">
+          <label>
+            <span>First Name</span>
+            <input formControlName="firstName" placeholder="Full name" />
+          </label>
+
+          <label>
+            <span>Email</span>
+            <input formControlName="email" type="email" />
+          </label>
+
+          <label>
+            <span>Type</span>
+            <input formControlName="type" />
+          </label>
+
+          <label>
+            <span>Status</span>
+            <input formControlName="status" />
+          </label>
+
+          <label class="span-2">
+            <span>Address</span>
+            <input formControlName="address" />
+          </label>
+
+          <label>
+            <span>Phone</span>
+            <input formControlName="phone" />
+          </label>
+
+          <label class="span-2">
+            <span>Image URL</span>
+            <input formControlName="imageUrl" />
+          </label>
+
+          <div class="actions">
+            <button type="button" (click)="onUpdate()" [disabled]="saving()">
+              {{ saving() ? "Saving..." : "Update" }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <div class="card table-card">
+    <h3 class="card-title">Invoices</h3>
+    <p class="sub">Customer Invoices</p>
+
+    <div class="table">
+      <div class="thead">
+        <div>Invoice Number</div>
+        <div>Service</div>
+        <div>Status</div>
+        <div>Date</div>
+        <div>Total</div>
+        <div>Action</div>
+      </div>
+
+      <div class="row" *ngFor="let inv of invoices()">
+        <div>{{ inv.id | uppercase }}</div>
+        <div class="service">{{ inv.service }}</div>
+        <div>
+          <span
+            class="tag"
+            [class.pending]="inv.status === 'PENDING'"
+            [class.paid]="inv.status === 'PAID'"
+          >
+            {{ inv.status }}
+          </span>
+        </div>
+        <div>{{ inv.date | date: "MMM d, y" }}</div>
+        <div>{{ inv.total | currency: "USD" : "symbol" }}</div>
+        <div>
+          <button class="ghost">Print</button>
+        </div>
+      </div>
+
+      <!-- <div class="row" *ngFor="let inv of invoices">
+        <div>{{ inv.id | uppercase }}</div>
+        <div class="service">{{ inv.service }}</div>
+        <div>
+          <span
+            class="tag"
+            [class.pending]="inv.status === 'PENDING'"
+            [class.paid]="inv.status === 'PAID'"
+          >
+            {{ inv.status }}
+          </span>
+        </div>
+        <div>{{ inv.date | date: "MMM d, y" }}</div>
+        <div>{{ inv.total | currency: "USD" : "symbol" }}</div>
+        <div>
+          <button class="ghost">Print</button>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading profile…</div>
+</ng-template>

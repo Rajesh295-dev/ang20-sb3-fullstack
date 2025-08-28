@@ -1,0 +1,121 @@
+.auth-wrap {
+  min-height: calc(100dvh - 56px);
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+  background: radial-gradient(1200px 800px at 20% 10%, #111827 0%, #0b0c10 55%);
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  padding: 28px;
+  color: #e6e6e6;
+}
+
+.card__header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+.subtitle {
+  color: #b8c0cc;
+  font-size: 0.95rem;
+}
+.form {
+  display: grid;
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+.field label {
+  font-size: 0.9rem;
+  color: #cfd6e4;
+}
+.field.has-error small {
+  color: #ef4444;
+}
+small {
+  font-size: 0.8rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #e6e6e6;
+}
+
+.password-input {
+  position: relative;
+}
+.password-input .toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #c7d2fe;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.terms {
+  color: #cfd6e4;
+  font-size: 0.9rem;
+}
+.link {
+  color: #c7d2fe;
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 0;
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  color: white;
+  font-weight: 600;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: white;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.switch {
+  text-align: center;
+  color: #b8c0cc;
+  margin-top: 8px;
+}

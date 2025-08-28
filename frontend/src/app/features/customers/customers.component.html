@@ -1,0 +1,68 @@
+<section class="page">
+  <header class="bar">
+    <h2>Customers</h2>
+
+    <div class="controls">
+      <input
+        type="text"
+        [formControl]="query"
+        placeholder="Customer Name"
+        (keyup.enter)="onSearch()"
+      />
+      <button class="btn" (click)="onSearch()">Search Customers</button>
+      <button class="btn ghost" (click)="clear()">Clear</button>
+      <button class="btn accent" (click)="exportExcel()">
+        Export to Excel
+      </button>
+      <a class="btn primary" routerLink="/addCustomer">+ New Customer</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <table class="table">
+      <thead>
+        <tr>
+          <th style="width: 60px">ID</th>
+          <th style="width: 70px">Photo</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th style="width: 150px">Phone</th>
+          <th style="width: 120px">Status</th>
+          <th style="width: 150px">Type</th>
+          <th style="width: 120px">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- <tr *ngFor="let c of filtered(); trackBy: c?.id"> -->
+        <tr *ngFor="let c of filtered(); trackBy: trackById">
+          <td>{{ c.id }}</td>
+          <td>
+            <img class="avatar" [src]="c.photoUrl" [alt]="c.name" />
+          </td>
+          <td class="name">{{ c.name }}</td>
+          <td class="email">{{ c.email }}</td>
+          <td>{{ c.phone }}</td>
+          <td>
+            <span
+              class="badge"
+              [class.badge--active]="c.status === 'ACTIVE'"
+              [class.badge--inactive]="c.status === 'INACTIVE'"
+              [class.badge--pending]="c.status === 'PENDING'"
+            >
+              {{ c.status }}
+            </span>
+          </td>
+          <td class="type">{{ c.type }}</td>
+          <td>
+            <a class="btn small" [routerLink]="['/customers', c.id]">View</a>
+          </td>
+        </tr>
+
+        <tr *ngIf="filtered().length === 0">
+          <td colspan="8" class="empty">No customers found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,123 @@
+<div class="page">
+  <!-- Left Sidebar -->
+  <aside class="sidebar">
+    <div class="user">
+      <div class="avatar" aria-hidden="true"></div>
+      <div class="who">
+        <div class="name">Junior RT</div>
+        <div class="since">Since July 25, 2022</div>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <button
+        [class.active]="section() === 'profile'"
+        (click)="select('profile')"
+      >
+        <span class="i i-profile"></span> Profile
+      </button>
+      <button
+        [class.active]="section() === 'password'"
+        (click)="select('password')"
+      >
+        <span class="i i-lock"></span> Password
+      </button>
+      <button
+        [class.active]="section() === 'authorization'"
+        (click)="select('authorization')"
+      >
+        <span class="i i-shield"></span> Authorization
+      </button>
+      <button
+        [class.active]="section() === 'account'"
+        (click)="select('account')"
+      >
+        <span class="i i-gear"></span> Account
+      </button>
+      <button
+        [class.active]="section() === 'authentication'"
+        (click)="select('authentication')"
+      >
+        <span class="i i-key"></span> Authentication
+      </button>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <section class="content">
+    <div class="card">
+      <header class="card__head">
+        <h2>Authorization Settings</h2>
+      </header>
+
+      <div class="grid">
+        <div class="col">
+          <label for="role">Role Name</label>
+          <input
+            id="role"
+            type="text"
+            [formControl]="roleForm.controls['roleName']"
+          />
+        </div>
+        <div class="col">
+          <label>Role Permissions</label>
+          <ul class="perm-list">
+            <li *ngFor="let p of permissions()">{{ p }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button
+          class="btn"
+          (click)="updateRole()"
+          [disabled]="saving() || roleForm.invalid"
+        >
+          <span *ngIf="!saving()">Update</span>
+          <span *ngIf="saving()" class="spinner" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Activities -->
+    <div class="card">
+      <header class="card__head">
+        <div>
+          <h3>Account Activities</h3>
+          <div class="muted small">Latest activities on your account.</div>
+        </div>
+      </header>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Device</th>
+              <th>IP Address</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th class="right">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of activities()">
+              <td>{{ a.device }}</td>
+              <td class="muted">{{ a.ip }}</td>
+              <td class="muted">{{ a.date }}</td>
+              <td>
+                <span [class]="typeClass(a.type)">{{ a.type }}</span>
+              </td>
+              <td>{{ a.description }}</td>
+              <td class="right">
+                <button class="btn btn--danger btn--sm" (click)="report(a)">
+                  Report
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>

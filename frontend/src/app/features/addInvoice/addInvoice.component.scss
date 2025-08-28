@@ -1,0 +1,136 @@
+$bg: #f3f4f6;
+$card: #ffffff;
+$ink: #111827;
+$muted: #6b7280;
+$accent: #4f46e5;
+$line: #e5e7eb;
+
+:host {
+  display: block;
+  background: #eef2f7;
+  padding: 1rem 0 2rem;
+}
+
+.crumbs {
+  max-width: 980px;
+  margin: 0 auto 0.75rem;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+
+  a {
+    color: #2563eb;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  span {
+    margin: 0 0.4rem;
+    color: $muted;
+  }
+  .muted {
+    color: $muted;
+  }
+}
+
+.page-title {
+  max-width: 980px;
+  margin: 0 auto 0.75rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $ink;
+
+  h1 {
+    font-size: 1.55rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  svg {
+    color: $ink;
+    opacity: 0.9;
+  }
+}
+
+.card {
+  max-width: 980px;
+  margin: 0 auto;
+  background: $card;
+  border: 1px solid $line;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  label {
+    font-size: 0.9rem;
+    color: $muted;
+  }
+  input,
+  select,
+  textarea {
+    appearance: none;
+    padding: 0.55rem 0.65rem;
+    border: 1px solid $line;
+    border-radius: 0.375rem;
+    background: #fff;
+    color: $ink;
+    font-size: 0.95rem;
+    outline: none;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #c7d2fe;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  }
+
+  .error {
+    font-size: 0.8rem;
+    color: #b91c1c;
+  }
+}
+
+.span-2 {
+  grid-column: span 2;
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+
+  .primary {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .primary:hover {
+    background: #2563eb;
+  }
+}
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .span-2 {
+    grid-column: span 1;
+  }
+}

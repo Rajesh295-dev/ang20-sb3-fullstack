@@ -1,0 +1,97 @@
+<nav class="crumbs">
+  <a routerLink="/">Home</a>
+  <span>/</span>
+  <a routerLink="/customers">Customers</a>
+  <span>/</span>
+  <span class="muted">New</span>
+</nav>
+
+<header class="page-title">
+  <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+    <path
+      fill="currentColor"
+      d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm-7 9a7 7 0 0 1 14 0zM19 10h2v2h-2v2h-2v-2h-2v-2h2V8h2z"
+    />
+  </svg>
+  <h1>New Customer</h1>
+</header>
+
+<form [formGroup]="form" class="card">
+  <div class="grid">
+    <!-- Name -->
+    <div class="field">
+      <label for="name">Name</label>
+      <input id="name" type="text" formControlName="name" placeholder="John" />
+      <small class="error" *ngIf="f.name.touched && f.name.invalid"
+        >Name is required.</small
+      >
+    </div>
+
+    <!-- Email -->
+    <div class="field">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="john@company.com"
+      />
+      <small class="error" *ngIf="f.email.touched && f.email.invalid"
+        >Valid email required.</small
+      >
+    </div>
+
+    <!-- Address -->
+    <div class="field">
+      <label for="address">Address</label>
+      <input id="address" type="text" formControlName="address" />
+    </div>
+
+    <!-- Phone -->
+    <div class="field">
+      <label for="phone">Phone</label>
+      <input
+        id="phone"
+        type="text"
+        formControlName="phone"
+        placeholder="(555) 555-5555"
+      />
+      <small class="error" *ngIf="f.phone.touched && f.phone.invalid"
+        >Digits and ()-+ only.</small
+      >
+    </div>
+
+    <!-- Type -->
+    <div class="field">
+      <label for="type">Type</label>
+      <select id="type" formControlName="type">
+        <option *ngFor="let t of types" [value]="t">{{ t }}</option>
+      </select>
+    </div>
+
+    <!-- Status -->
+    <div class="field">
+      <label for="status">Status</label>
+      <select id="status" formControlName="status">
+        <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+
+    <!-- Image URL (full width) -->
+    <div class="field span-2">
+      <label for="imageUrl">Image URL</label>
+      <input
+        id="imageUrl"
+        type="url"
+        formControlName="imageUrl"
+        placeholder="https://..."
+      />
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="primary" (click)="save()">
+      Save Customer
+    </button>
+  </div>
+</form>

@@ -1,0 +1,104 @@
+<div class="auth-wrap">
+  <main class="card">
+    <header class="card__header">
+      <h1>Create account</h1>
+      <p class="subtitle">Join us in seconds. It’s free.</p>
+    </header>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form" novalidate>
+      <!-- name -->
+      <div class="field" [class.has-error]="showError('name')">
+        <label for="name">Full name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Jane Doe"
+        />
+        <small *ngIf="showError('name')">{{ getError("name") }}</small>
+      </div>
+
+      <!-- email -->
+      <div class="field" [class.has-error]="showError('email')">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="you@example.com"
+        />
+        <small *ngIf="showError('email')">{{ getError("email") }}</small>
+      </div>
+
+      <!-- password + confirm -->
+      <div formGroupName="passwordGroup">
+        <div
+          class="field"
+          [class.has-error]="showError('passwordGroup.password')"
+        >
+          <label for="password">Password</label>
+          <div class="password-input">
+            <input
+              [type]="showPwd ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              placeholder="••••••••"
+            />
+            <button class="toggle" type="button" (click)="showPwd = !showPwd">
+              {{ showPwd ? "Hide" : "Show" }}
+            </button>
+          </div>
+          <small *ngIf="showError('passwordGroup.password')">{{
+            getError("passwordGroup.password")
+          }}</small>
+        </div>
+
+        <div
+          class="field"
+          [class.has-error]="showError('passwordGroup.confirm') || pwdMismatch"
+        >
+          <label for="confirm">Confirm password</label>
+          <div class="password-input">
+            <input
+              [type]="showConfirm ? 'text' : 'password'"
+              id="confirm"
+              formControlName="confirm"
+              placeholder="••••••••"
+            />
+            <button
+              class="toggle"
+              type="button"
+              (click)="showConfirm = !showConfirm"
+            >
+              {{ showConfirm ? "Hide" : "Show" }}
+            </button>
+          </div>
+          <small *ngIf="showError('passwordGroup.confirm')">{{
+            getError("passwordGroup.confirm")
+          }}</small>
+          <small *ngIf="pwdMismatch">Passwords do not match</small>
+        </div>
+      </div>
+
+      <!-- terms -->
+      <label class="row terms" [class.has-error]="showError('terms')">
+        <input type="checkbox" formControlName="terms" />
+        <span
+          >I agree to the <a class="link" routerLink="/terms">Terms</a> and
+          <a class="link" routerLink="/privacy">Privacy Policy</a>.</span
+        >
+      </label>
+
+      <!-- button -->
+      <button class="btn" [disabled]="form.invalid || loading">
+        <span *ngIf="!loading">Create account</span>
+        <span *ngIf="loading" class="spinner"></span>
+      </button>
+
+      <p class="switch">
+        Already have an account?
+        <a class="link" routerLink="/login">Sign in</a>
+      </p>
+    </form>
+  </main>
+</div>
